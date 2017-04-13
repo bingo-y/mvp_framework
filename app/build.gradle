@@ -1,29 +1,99 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    def globalConfig = rootProject.extensions.getByName("ext")
+    // Create a variable called keystorePropertiesFile, and initialize it to your
+    // keystore.properties file, in the rootProject folder.
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    // Initialize a new Properties() object called keystoreProperties.
+    def keystoreProperties = new Properties()
+    // Load your keystore.properties file into the keystoreProperties object.
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+    compileSdkVersion globalConfig["compileSdkVersion"]
+    buildToolsVersion globalConfig["buildToolsVersion"]
+
     defaultConfig {
-        applicationId "com.bingo.mvp_framework"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId globalConfig["applicationId"]
+        minSdkVersion globalConfig["minSdkVersion"]
+        targetSdkVersion globalConfig["targetSdkVersion"]
+        versionCode globalConfig["versionCode"]
+        versionName globalConfig["versionName"]
+        testInstrumentationRunner globalConfig["testInstrumentationRunner"]
     }
-    buildTypes {
+
+    signingConfigs {
+        debug {
+            storeFile file(keystoreProperties['debugStoreFile'])
+            storePassword keystoreProperties['debugStorePassword']
+            keyAlias keystoreProperties['debugKeyAlias']
+            keyPassword keystoreProperties['debugKeyPassword']
+            v2SigningEnabled true
+        }
         release {
+            storeFile file(keystoreProperties['debugStoreFile'])
+            storePassword keystoreProperties['debugStorePassword']
+            keyAlias keystoreProperties['debugKeyAlias']
+            keyPassword keystoreProperties['debugKeyPassword']
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug {
             minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        official {}
+    }
+
+    //rename apk
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def oldFile = output.outputFile
+            if (oldFile != null && oldFile.name.endsWith('.apk')) {
+                def appName = 'app'
+                def releaseApkName
+                // 输出apk名称为app_debug_official_1.0.0.apk
+                releaseApkName = "${appName}_${variant.buildType.name}_${variant.productFlavors[0].name}_${defaultConfig.versionName}.apk"
+                output.outputFile = new File(oldFile.parent, releaseApkName)
+            }
+
+
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError true
+        ignoreWarnings true
+    }
+//
+//    compileOptions {
+//        sourceCompatibility globalConfig["javaVersion"]
+//        targetCompatibility globalConfig["javaVersion"]
+//    }
 }
 
 dependencies {
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
+
+    compile project(':base')
 }
