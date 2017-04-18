@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     def globalConfig = rootProject.extensions.getByName("ext")
@@ -89,6 +90,14 @@ android {
 //    }
 }
 
+
+greendao {
+    def greendaoConfig = rootProject.ext.greendaoConfig
+    schemaVersion greendaoConfig.schemaVersion
+    daoPackage greendaoConfig.daoPackageApp
+    targetGenDir greendaoConfig.targetGenDir
+}
+
 dependencies {
     def dependencies = rootProject.ext.dependencies
     def testDependencies = rootProject.ext.testDependencies
@@ -100,4 +109,8 @@ dependencies {
     testCompile testDependencies.junit
 
     compile project(':base')
+
+    // butterknife
+    compile dependencies.butterknife
+    annotationProcessor dependencies.butterknife_compiler
 }

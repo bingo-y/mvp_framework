@@ -8,10 +8,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bingo.mvp_framework.MainActivity">
+    tools:context="com.bingo.mvp_framework.ui.main.MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/b_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:padding="8dp"
+        android:background="@android:drawable/ic_input_add"/>
+    <Button
+        android:id="@+id/b_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/b_add"
+        android:padding="8dp"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"/>
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b_add"
+        android:layout_marginTop="5dp"/>
 </RelativeLayout>

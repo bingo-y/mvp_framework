@@ -45,9 +45,9 @@ ext {
 
     // url
     // 测试地址
-    api_url_test = ''
+    api_url_test = "\"http://www.baidu.com\""
     //正式地址
-    api_url_release = ''
+    api_url_release = "\"https://www.baidu.com\""
 
     dependencies = [
             // android
@@ -85,6 +85,12 @@ ext {
             greendao : "org.greenrobot:greendao:$greendaoVersion",
             eventbus : "org.greenrobot:eventbus:$eventbusVersion"
 
+    ]
+
+    greendaoConfig = [
+            schemaVersion : 1,
+            daoPackageApp : "com.bingo.mvp_framework.io.db.dao",
+            targetGenDir : "src/main/java"
     ]
 
     testDependencies = [
