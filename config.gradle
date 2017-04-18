@@ -35,10 +35,19 @@ ext {
     timberVersion = '4.5.1'
     glideVersion = '3.7.0'
     butterknifeVersion = '8.5.1'
+    // greenrobot
+    greendaoVersion = '3.2.2'
+    eventbusVersion = '3.0.0'
 
-    //Test
+    // Test
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
+
+    // url
+    // 测试地址
+    api_url_test = ''
+    //正式地址
+    api_url_release = ''
 
     dependencies = [
             // android
@@ -71,6 +80,11 @@ ext {
             timber : "com.jakewharton.timber:timber:$timberVersion",
             butterknife : "com.jakewharton:butterknife:$butterknifeVersion",
             butterknife_compiler : "com.jakewharton:butterknife-compiler:$butterknifeVersion",
+
+            // greenrobot
+            greendao : "org.greenrobot:greendao:$greendaoVersion",
+            eventbus : "org.greenrobot:eventbus:$eventbusVersion"
+
     ]
 
     testDependencies = [

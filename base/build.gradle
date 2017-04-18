@@ -15,9 +15,17 @@ android {
         testInstrumentationRunner globalConfig["testInstrumentationRunner"]
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            //服务器地址
+            buildConfigField "String", "API_URL", globalConfig["api_url_test"]
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            //服务器地址
+            buildConfigField "String", "API_URL", globalConfig["api_url_release"]
         }
     }
 }
@@ -59,4 +67,7 @@ dependencies {
     // butterknife
     compile dependencies.butterknife
     annotationProcessor dependencies.butterknife_compiler
+    // greenrobot
+    compile dependencies.greendao
+    compile dependencies.eventbus
 }
