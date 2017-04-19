@@ -23,6 +23,13 @@
         android:layout_toRightOf="@+id/b_add"
         android:padding="8dp"
         android:background="@android:drawable/ic_menu_close_clear_cancel"/>
+    <Button
+        android:id="@+id/b_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/b_delete"
+        android:padding="8dp"
+        android:background="@android:drawable/ic_menu_call"/>
     <TextView
         android:id="@+id/tv_data"
         android:layout_width="wrap_content"

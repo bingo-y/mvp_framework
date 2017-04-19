@@ -21,6 +21,12 @@ android {
         versionCode globalConfig["versionCode"]
         versionName globalConfig["versionName"]
         testInstrumentationRunner globalConfig["testInstrumentationRunner"]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
 
     signingConfigs {
@@ -29,7 +35,6 @@ android {
             storePassword keystoreProperties['debugStorePassword']
             keyAlias keystoreProperties['debugKeyAlias']
             keyPassword keystoreProperties['debugKeyPassword']
-            v2SigningEnabled true
         }
         release {
             storeFile file(keystoreProperties['debugStoreFile'])
@@ -113,4 +118,6 @@ dependencies {
     // butterknife
     compile dependencies.butterknife
     annotationProcessor dependencies.butterknife_compiler
+    // arouter
+    annotationProcessor dependencies.arouter_compiler
 }

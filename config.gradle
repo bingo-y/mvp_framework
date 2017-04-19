@@ -22,6 +22,8 @@ ext {
     gsonVersion = '2.8.0'
     // alibaba
     fastjsonVersion = '1.1.56.android'
+    arouterApiVersion = '1.2.1'
+    arouterCompilerVersion = '1.1.2'
     // square
     retrofitVersion = '2.2.0'
     retrofit2Rxjava2AdapterVersion = '1.0.0'
@@ -62,6 +64,8 @@ ext {
 
             // alibaba
             fastjson : "com.alibaba:fastjson:$fastjsonVersion",
+            arouter_api : "com.alibaba:arouter-api:$arouterApiVersion",
+            arouter_compiler : "com.alibaba:arouter-compiler:$arouterCompilerVersion",
 
             // square
             okhttp : "com.squareup.okhttp3:okhttp:$okhttpVersion",

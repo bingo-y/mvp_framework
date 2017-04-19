@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.bingo.base.ui.BaseActivity;
 import com.bingo.mvp_framework.io.db.DBManager;
 import com.bingo.mvp_framework.io.db.entity.Note;
 import com.bingo.mvp_framework.R;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.b_add)
     Button bAdd;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.b_add, R.id.b_delete})
+    @OnClick({R.id.b_add, R.id.b_delete, R.id.b_route})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_add:
@@ -63,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                     DBManager.getInstance(getApplicationContext()).getDaoSession().getNoteDao().delete(notes.get(notes.size() - 1));
                     tvData.setText(getNoteText());
                 }
+                break;
+            case R.id.b_route:
+                ARouter.getInstance().build("/mvp/test").navigation();
                 break;
         }
     }
