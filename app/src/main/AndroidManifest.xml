@@ -39,6 +39,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.ArouterTestActivity" />
+
+        <meta-data android:name="com.bingo.mvp_framework.support.glide.GlideConfiguration"
+            android:value="GlideModule" />
     </application>
 
 </manifest>

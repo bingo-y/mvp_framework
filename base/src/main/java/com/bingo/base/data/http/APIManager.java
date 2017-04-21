@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class APIManager {
-    private static final boolean DEBUG = BuildConfig.DEBUG;
+    private static final boolean DEBUG = BuildConfig.IS_DEBUG;
     private static final String BASE_URL = BuildConfig.API_URL;
     private static OkHttpClient client;
     private static ConcurrentHashMap<String, Object> APICache = new ConcurrentHashMap<>(10);
@@ -90,4 +90,6 @@ public class APIManager {
                 .addInterceptor(HeaderInterceptor.getInstance())
                 .build();
     }
+
+
 }

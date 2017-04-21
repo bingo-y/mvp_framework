@@ -1,4 +1,4 @@
-package com.bingo.mvp_framework.app.route;
+package com.bingo.mvp_framework.route;
 
 import android.content.Context;
 
@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.facade.template.IInterceptor;
 public class RouteInterceptor implements IInterceptor {
     @Override
     public void process(Postcard postcard, InterceptorCallback callback) {
+        callback.onContinue(postcard);
 
     }
 

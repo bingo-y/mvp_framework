@@ -10,4 +10,7 @@ public class GlobalConfig {
     public static final boolean DB_ENCRYPTED = false;
     public static final String DB_NAME = "GREEN_DAO.DB";
 
+    //share preferences name
+    public static final String SHARE_PREFERENCES_NAME = "sp_bingo";
+    public static final String SP_KEY_VERSION_CODE = "version_code";
 }

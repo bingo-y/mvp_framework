@@ -5,11 +5,11 @@ android {
     def globalConfig = rootProject.extensions.getByName("ext")
     // Create a variable called keystorePropertiesFile, and initialize it to your
     // keystore.properties file, in the rootProject folder.
-    def keystorePropertiesFile = rootProject.file("keystore.properties")
-    // Initialize a new Properties() object called keystoreProperties.
-    def keystoreProperties = new Properties()
-    // Load your keystore.properties file into the keystoreProperties object.
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    def keystorePropertiesFile = rootProject.file("app.properties")
+    // Initialize a new Properties() object called appProperties.
+    def appProperties = new Properties()
+    // Load your keystore.properties file into the appProperties object.
+    appProperties.load(new FileInputStream(keystorePropertiesFile))
 
     compileSdkVersion globalConfig["compileSdkVersion"]
     buildToolsVersion globalConfig["buildToolsVersion"]
@@ -31,16 +31,16 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file(keystoreProperties['debugStoreFile'])
-            storePassword keystoreProperties['debugStorePassword']
-            keyAlias keystoreProperties['debugKeyAlias']
-            keyPassword keystoreProperties['debugKeyPassword']
+            storeFile file(appProperties['debugStoreFile'])
+            storePassword appProperties['debugStorePassword']
+            keyAlias appProperties['debugKeyAlias']
+            keyPassword appProperties['debugKeyPassword']
         }
         release {
-            storeFile file(keystoreProperties['debugStoreFile'])
-            storePassword keystoreProperties['debugStorePassword']
-            keyAlias keystoreProperties['debugKeyAlias']
-            keyPassword keystoreProperties['debugKeyPassword']
+            storeFile file(appProperties['debugStoreFile'])
+            storePassword appProperties['debugStorePassword']
+            keyAlias appProperties['debugKeyAlias']
+            keyPassword appProperties['debugKeyPassword']
             v2SigningEnabled true
         }
     }
@@ -50,12 +50,14 @@ android {
             minifyEnabled false
             shrinkResources false
             signingConfig signingConfigs.debug
+            buildConfigField "String", "DB_PASSWORD", appProperties['dbPassword']
         }
         release {
             minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "DB_PASSWORD", appProperties['dbPassword']
         }
     }
 
@@ -105,14 +107,10 @@ greendao {
 
 dependencies {
     def dependencies = rootProject.ext.dependencies
+    def debugDependencies = rootProject.ext.debugDependencies
     def testDependencies = rootProject.ext.testDependencies
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile(testDependencies.espresso, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile testDependencies.junit
-
     compile project(':base')
 
     // butterknife
@@ -120,4 +118,13 @@ dependencies {
     annotationProcessor dependencies.butterknife_compiler
     // arouter
     annotationProcessor dependencies.arouter_compiler
+
+    // leakcanary
+    releaseCompile dependencies.leakcanary
+    debugCompile debugDependencies.leakcanary
+
+    androidTestCompile(testDependencies.espresso, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile testDependencies.junit
 }

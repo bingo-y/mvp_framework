@@ -26,12 +26,14 @@ android {
             shrinkResources false
             //服务器地址
             buildConfigField "String", "API_URL", globalConfig["api_url_test"]
+            buildConfigField "boolean", "IS_DEBUG", "true"
         }
         release {
             minifyEnabled false
             shrinkResources false
             //服务器地址
             buildConfigField "String", "API_URL", globalConfig["api_url_release"]
+            buildConfigField "boolean", "IS_DEBUG", "false"
         }
     }
 }
@@ -56,6 +58,7 @@ dependencies {
     compile dependencies.timber
     // glide
     compile dependencies.glide
+    compile dependencies.okhttp3_integration
     // google
     compile dependencies.gson
     // alibaba
@@ -66,6 +69,8 @@ dependencies {
     // rx java
     compile dependencies.rxjava
     compile dependencies.rxandroid
+    // rx preferences
+    compile dependencies.rx_preferences
     // square
     compile dependencies.okhttp
     compile dependencies.okio
@@ -79,4 +84,6 @@ dependencies {
     // greenrobot
     compile dependencies.greendao
     compile dependencies.eventbus
+    // sqlcipher
+    compile dependencies.sqlcipher
 }

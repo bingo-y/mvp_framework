@@ -1,11 +1,13 @@
 package com.bingo.mvp_framework.io.db;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.bingo.base.constant.GlobalConfig;
+import com.bingo.mvp_framework.BuildConfig;
 import com.bingo.mvp_framework.io.db.dao.DaoMaster;
 import com.bingo.mvp_framework.io.db.dao.DaoSession;
+
+import org.greenrobot.greendao.database.Database;
 
 
 /**
@@ -14,6 +16,8 @@ import com.bingo.mvp_framework.io.db.dao.DaoSession;
  */
 
 public class DBManager {
+    private final static String DB_PASSWORD = BuildConfig.DB_PASSWORD;
+
     private static DBManager mDBManager;
     private SqliteOpenHelper mDevOpenHelper;
     private DaoMaster mDaoMaster;
@@ -43,21 +47,28 @@ public class DBManager {
     /**
      * @desc 获取可读数据库
      **/
-    public SQLiteDatabase getReadableDatabase() {
+    public Database getReadableDatabase() {
         if (null == mDevOpenHelper) {
             getInstance(mContext);
         }
-        return mDevOpenHelper.getReadableDatabase();
+        return mDevOpenHelper.getReadableDb();
     }
 
     /**
      * @desc 获取可写数据库
      **/
-    public SQLiteDatabase getWritableDatabase() {
+    public Database getWritableDatabase() {
         if (null == mDevOpenHelper) {
             getInstance(mContext);
         }
-        return mDevOpenHelper.getWritableDatabase();
+        return mDevOpenHelper.getWritableDb();
+    }
+
+    public Database getEncryptedWritableDatabase() {
+        if (null == mDevOpenHelper) {
+            getInstance(mContext);
+        }
+        return mDevOpenHelper.getEncryptedWritableDb(DB_PASSWORD);
     }
 
     /**
@@ -69,7 +80,7 @@ public class DBManager {
         if (null == mDaoMaster) {
             synchronized (DBManager.class) {
                 if (null == mDaoMaster) {
-                    mDaoMaster = new DaoMaster(getWritableDatabase());
+                    mDaoMaster = new DaoMaster(getEncryptedWritableDatabase());
                 }
             }
         }

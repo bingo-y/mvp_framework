@@ -20,7 +20,9 @@ public class HeaderInterceptor implements Interceptor {
 
     public static HeaderInterceptor getInstance() {
         if (instance == null) {
-            instance = new HeaderInterceptor();
+            synchronized (HeaderInterceptor.class) {
+                instance = new HeaderInterceptor();
+            }
         }
         return instance;
     }
