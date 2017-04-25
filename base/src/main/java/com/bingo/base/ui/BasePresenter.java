@@ -36,7 +36,7 @@ public class BasePresenter<V extends IView> {
     /**
      * RxJava取消注册，避免内存泄漏
      */
-    public void unsubscribe() {
+    public void unSubscribe() {
         if (disposables != null) {
             disposables.dispose();
         }
@@ -48,7 +48,7 @@ public class BasePresenter<V extends IView> {
 
     public void onDestroy() {
         //cancel request
-        unsubscribe();
+        unSubscribe();
         view = null;
         disposables = null;
     }

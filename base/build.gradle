@@ -86,4 +86,7 @@ dependencies {
     compile dependencies.eventbus
     // sqlcipher
     compile dependencies.sqlcipher
+    // rx permissions
+    compile dependencies.rx_permissions
+
 }

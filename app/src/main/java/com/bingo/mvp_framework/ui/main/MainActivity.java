@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bingo.base.ui.BaseActivity;
 import com.bingo.mvp_framework.io.db.DBManager;
+import com.bingo.mvp_framework.io.db.dao.NoteDao;
 import com.bingo.mvp_framework.io.db.entity.Note;
 import com.bingo.mvp_framework.R;
 

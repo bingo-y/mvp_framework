@@ -46,6 +46,8 @@ ext {
     eventbusVersion = '3.0.0'
     // sqlcipher
     sqlcipherVersion = '3.5.6'
+    // RxPermissions
+    rxPermissionsVersion = '0.9.4@aar'
 
     // Test
     junitVersion = '4.12'
@@ -101,7 +103,10 @@ ext {
             eventbus : "org.greenrobot:eventbus:$eventbusVersion",
 
             // sqlcipher
-            sqlcipher : "net.zetetic:android-database-sqlcipher:$sqlcipherVersion"
+            sqlcipher : "net.zetetic:android-database-sqlcipher:$sqlcipherVersion",
+
+            // RxPermissions
+            rx_permissions : "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissionsVersion"
     ]
 
     greendaoConfig = [
