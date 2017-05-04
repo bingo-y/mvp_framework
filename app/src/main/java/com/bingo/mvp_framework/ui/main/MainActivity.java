@@ -84,4 +84,9 @@ public class MainActivity extends BaseActivity {
         }
         return stringBuilder.toString();
     }
+
+    @Override
+    public int getTitleLabelResId() {
+        return R.string.app_name;
+    }
 }

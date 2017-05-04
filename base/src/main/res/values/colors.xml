@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 颜色 -->
+    <color name="app_white">#ffffff</color>
+    <color name="app_ef">#efefef</color>
+
+    <!-- 字体颜色 -->
+    <color name="font_333">#333333</color>
+
+</resources>

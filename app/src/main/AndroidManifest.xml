@@ -32,19 +32,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.splash.SplashActivity">
+
+        </activity>
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity">
-
-        </activity>
         <activity android:name=".ui.main.ArouterTestActivity" />
 
         <!-- glide配置 -->
-        <meta-data android:name=".support.glide.GlideConfiguration"
+        <meta-data android:name="com.bingo.mvp_framework.support.glide.GlideConfiguration"
             android:value="GlideModule" />
         <!-- 支持高长宽比,默认的最大长宽比为1.86 -->
         <meta-data android:name="android.max_aspect"

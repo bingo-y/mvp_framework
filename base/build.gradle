@@ -4,7 +4,7 @@ android {
     def globalConfig = rootProject.extensions.getByName("ext")
     compileSdkVersion globalConfig["compileSdkVersion"]
     buildToolsVersion globalConfig["buildToolsVersion"]
-    resourcePrefix "base_"
+//    resourcePrefix "base_"
 
     defaultConfig {
         minSdkVersion globalConfig["minSdkVersion"]
@@ -88,5 +88,6 @@ dependencies {
     compile dependencies.sqlcipher
     // rx permissions
     compile dependencies.rx_permissions
-
+    // ultra-ptr
+    compile dependencies.ultra_ptr
 }
